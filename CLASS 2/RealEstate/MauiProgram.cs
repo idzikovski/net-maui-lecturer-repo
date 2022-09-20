@@ -1,4 +1,7 @@
-﻿namespace RealEstate;
+﻿using RealEstate.Interfaces;
+using RealEstate.Services;
+
+namespace RealEstate;
 
 public static class MauiProgram
 {
