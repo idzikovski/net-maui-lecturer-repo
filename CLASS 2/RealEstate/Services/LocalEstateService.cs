@@ -1,16 +1,18 @@
 ﻿using Newtonsoft.Json;
 using RealEstate.Interfaces;
 using RealEstate.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealEstate.Services
 {
     public class LocalEstateService : IEstatesService
     {
+        private readonly IImageProvider _imageProvider;
+
+        public LocalEstateService(IImageProvider imageProvider)
+        {
+            _imageProvider = imageProvider;
+        }
+
         public async Task<List<Estate>> GetEstates()
         {
 			try
@@ -20,12 +22,24 @@ namespace RealEstate.Services
 
                 var contents = reader.ReadToEnd();
 
-                return JsonConvert.DeserializeObject<List<Estate>>(contents);
+                return PrepareContent(contents);
             }
 			catch (Exception ex)
 			{
                 return null;
 			}
+        }
+
+        private List<Estate> PrepareContent(string contents)
+        {
+            var estates = JsonConvert.DeserializeObject<List<Estate>>(contents);
+
+            foreach (var estate in estates)
+            {
+                estate.Photo = _imageProvider.GetImage();
+            }
+
+            return estates;
         }
     }
 }

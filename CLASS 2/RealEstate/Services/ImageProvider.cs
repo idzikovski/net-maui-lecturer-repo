@@ -28,7 +28,7 @@ namespace RealEstate.Services
             var image = _images[_currentImage];
             _currentImage++;
 
-            return image; 
+            return image;
         }
 
         public List<string> GetImages(int count)
