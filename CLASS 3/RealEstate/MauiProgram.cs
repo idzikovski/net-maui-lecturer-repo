@@ -19,6 +19,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<LoginPage>();
 		builder.Services.AddTransient<EstatesPage>();
+		builder.Services.AddTransient<EstateDetails>();
 
 		builder.Services.AddSingleton<IImageProvider, ImageProvider>();
 		builder.Services.AddSingleton<IEstatesService, LocalEstateService>();

@@ -10,5 +10,7 @@ namespace RealEstate.Interfaces
     public interface IEstatesService
     {
         Task<List<Estate>> GetEstates();
+
+        Task<Estate> GetEstateById(int id);
     }
 }

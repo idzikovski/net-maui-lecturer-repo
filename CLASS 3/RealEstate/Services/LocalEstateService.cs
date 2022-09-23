@@ -7,6 +7,7 @@ namespace RealEstate.Services
     public class LocalEstateService : IEstatesService
     {
         private readonly IImageProvider _imageProvider;
+        private List<Estate> _estates =new List<Estate>();
 
         public LocalEstateService(IImageProvider imageProvider)
         {
@@ -22,7 +23,8 @@ namespace RealEstate.Services
 
                 var contents = reader.ReadToEnd();
 
-                return PrepareContent(contents);
+                _estates = AddImages(contents);
+                return _estates;
             }
 			catch (Exception ex)
 			{
@@ -30,13 +32,19 @@ namespace RealEstate.Services
 			}
         }
 
-        private List<Estate> PrepareContent(string contents)
+        public Task<Estate> GetEstateById(int id)
+        {
+            return Task.FromResult(_estates.FirstOrDefault(x => x.Id == id));
+        }
+
+        private List<Estate> AddImages(string contents)
         {
             var estates = JsonConvert.DeserializeObject<List<Estate>>(contents);
 
             foreach (var estate in estates)
             {
                 estate.Photo = _imageProvider.GetImage();
+                estate.Photos = _imageProvider.GetImages(5);
             }
 
             return estates;

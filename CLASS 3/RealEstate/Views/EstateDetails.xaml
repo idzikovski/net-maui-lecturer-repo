@@ -21,7 +21,7 @@
                         <Image Source="img1.png"
                                HeightRequest="150"
                                Aspect="AspectFill"/>
-                        <Label Text="Estate Name"
+                        <Label x:Name="EstateName"
                                Margin="10,5"
                                HorizontalOptions="Start"
                                VerticalOptions="End"
@@ -38,10 +38,10 @@
                                Grid.Row="0"
                                HeightRequest="20"
                                    Opacity=".5"/>
-                            <Label Grid.Column="1"
+                            <Label x:Name="Address"
+                                    Grid.Column="1"
                                    Grid.Row="0"
                                    VerticalOptions="Center"
-                                Text="605 Shoshone Junction"
                                    FontSize="18"/>
 
 
@@ -50,13 +50,14 @@
                                                    Grid.ColumnSpan="2">
                                 <Image Source="bed.png"
                                        HeightRequest="15"/>
-                                <Label Text="4 bedroom"/>
+                                <Label x:Name="Bedrooms"
+                                    Text="4 bedroom"/>
                                 <Image Source="bath.png"
                                        HeightRequest="15"/>
-                                <Label Text="2 bathrooms"/>
+                                <Label x:Name="Bathrooms"/>
                                 <Image Source="house.png"
                                        HeightRequest="15"/>
-                                <Label Text="125m²"/>
+                                <Label x:Name="Area"/>
                             </HorizontalStackLayout>
                         </Grid>
                     </Grid>
@@ -86,30 +87,30 @@
                                Grid.Row="0"
                                HeightRequest="20"
                                    Opacity=".5"/>
-                        <Label Grid.Column="1"
+                        <Label x:Name="Contact" 
+                            Grid.Column="1"
                                    Grid.Row="0"
                                    VerticalOptions="Center"
-                                Text="Ivan Djikovski"
                                    FontSize="18"/>
 
                         <Image Source="call.png"
                                Grid.Row="1"
                                HeightRequest="20"
                                    Opacity=".5"/>
-                        <Label Grid.Column="1"
+                        <Label x:Name="Phone"
+                            Grid.Column="1"
                                    Grid.Row="1"
                                    VerticalOptions="Center"
-                                Text="+3899 70 430 256"
                                    FontSize="18"/>
 
                         <Image Source="email.png"
                                Grid.Row="2"
                                HeightRequest="20"
                                    Opacity=".5"/>
-                        <Label Grid.Column="1"
+                        <Label x:Name="Email" 
+                            Grid.Column="1"
                                    Grid.Row="2"
                                    VerticalOptions="Center"
-                                Text="ivan.djikovski@wsa.com"
                                    FontSize="18"/>
                     </Grid>
                 </Frame>
@@ -135,7 +136,7 @@
                                 <DataTemplate>
                                     <Frame Padding="0"
                                        Margin="10">
-                                        <Image Source="img0.png"/>
+                                        <Image Source="{Binding .}"/>
                                     </Frame>
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
