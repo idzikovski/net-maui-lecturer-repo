@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RealEstate.Views.LoginPage"
+             Title="LoginPage">
+    <Grid>
+        <Image HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               Source="background.jpg"
+               Aspect="AspectFill"
+               Opacity=".8"/>
+        <Label Text="Real Estate"
+               HorizontalOptions="Center"
+               Margin="0,40,0,0"
+               TextColor="White"
+               FontSize="40"/>
+        <Frame VerticalOptions="End"
+               BackgroundColor="#80FFFFFF"
+               Margin="10,10,10,150">
+            <VerticalStackLayout HorizontalOptions="FillAndExpand"
+                             VerticalOptions="Center"
+                             Spacing="10"
+                             Margin="20,0">
+                <Entry Placeholder="Username"
+                   BackgroundColor="White"/>
+                <Entry Placeholder="Password"
+                   BackgroundColor="White"
+               IsPassword="True"/>
+                <Button Text="Login"
+                        Margin="0,50,0,0"/>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>
