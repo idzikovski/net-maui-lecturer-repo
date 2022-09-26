@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SandboxApp.MVVM.FullNamePage"
+             Title="FullNamePage">
+    <VerticalStackLayout>
+        <Entry x:Name="FirstName"
+               Placeholder="First Name"
+               Text="{Binding FirstName}"
+               TextChanged="TextChanged"/>
+        <Entry x:Name="LastName"
+               Text="{Binding LastName}"
+               Placeholder="Last Name"
+               TextChanged="TextChanged"/>
+        <Label x:Name="FullName"
+               Text="{Binding FullName}"/>
+    </VerticalStackLayout>
+</ContentPage>
