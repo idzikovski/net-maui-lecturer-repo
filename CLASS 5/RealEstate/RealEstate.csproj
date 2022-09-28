@@ -55,6 +55,7 @@
 	  <None Remove="Resources\Images\bed.png" />
 	  <None Remove="Resources\Images\call.png" />
 	  <None Remove="Resources\Images\contact.png" />
+	  <None Remove="Resources\Images\create.png" />
 	  <None Remove="Resources\Images\delete.png" />
 	  <None Remove="Resources\Images\email.png" />
 	  <None Remove="Resources\Images\home.png" />
@@ -70,6 +71,7 @@
 	  <None Remove="Resources\Images\img7.png" />
 	  <None Remove="Resources\Images\pencil.png" />
 	  <None Remove="Resources\Images\room.png" />
+	  <None Remove="Resources\Images\save.png" />
 	  <None Remove="Resources\Images\user.png" />
 	  <None Remove="Resources\Raw\estates.json" />
 	</ItemGroup>
@@ -81,6 +83,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\ControlTemplates.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\EstateDetails.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -88,6 +93,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\UpsertPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

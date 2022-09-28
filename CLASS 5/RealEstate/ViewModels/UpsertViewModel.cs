@@ -4,11 +4,26 @@ using RealEstate.Models;
 
 namespace RealEstate.ViewModels
 {
-    
+    [QueryProperty(nameof(IsUpdate), nameof(IsUpdate))]
     [QueryProperty(nameof(EstateId), nameof(EstateId))]
-    public partial class EstateDetailsViewModel : ObservableObject
+    public partial class UpsertViewModel : ObservableObject
     {
         private readonly IEstatesService _estatesService;
+
+        public UpsertViewModel(IEstatesService estatesService)
+        {
+            _estatesService = estatesService;
+        }
+
+        private bool _isUpdate;
+        public bool IsUpdate
+        {
+            get => _isUpdate;
+            set
+            {
+                _isUpdate = value;
+            }
+        }
 
         private int _estateId;
         public int EstateId
@@ -22,16 +37,16 @@ namespace RealEstate.ViewModels
         }
 
         [ObservableProperty]
-        private List<string> _photos;
-
-        [ObservableProperty]
-        private string _photo;
+        private string _actionIcon;
 
         [ObservableProperty]
         private string _estateName;
 
         [ObservableProperty]
         private string _address;
+
+        [ObservableProperty]
+        private int _price;
 
         [ObservableProperty]
         private int _bedrooms;
@@ -51,11 +66,6 @@ namespace RealEstate.ViewModels
         [ObservableProperty]
         private string _contactPersonEmail;
 
-        public EstateDetailsViewModel(IEstatesService estatesService)
-        {
-            _estatesService = estatesService;
-        }
-
         private void GetEstate(int value)
         {
             _estatesService.GetEstateById(EstateId).ContinueWith(InitView);
@@ -67,10 +77,9 @@ namespace RealEstate.ViewModels
 
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                Photos = estate.Photos;
-                Photo = estate.Photo;
                 EstateName = estate.EstateName;
                 Address = estate.Address;
+                Price = estate.Price;
                 Bedrooms = estate.RoomNumber;
                 Bathrooms = estate.BathroomNumber;
                 Area = estate.Area;

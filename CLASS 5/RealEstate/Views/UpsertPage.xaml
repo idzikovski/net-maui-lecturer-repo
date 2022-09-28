@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RealEstate.Views.UpsertPage"
+             ControlTemplate="{StaticResource background}"
+             xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
+             x:DataType="viewmodels:UpsertViewModel"
+             Title="UpsertPage">
+    <ContentPage.Resources>
+        <Style x:Key="baseEntry" TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="White"/>
+        </Style>
+        <Style x:Key="numericEntry" TargetType="Entry" BasedOn="{StaticResource baseEntry}">
+            <Setter Property="Keyboard" Value="Numeric"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="{Binding ActionIcon}"/>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <Frame HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start"
+           BackgroundColor="#80FFFFFF"
+           Margin="15">
+            <VerticalStackLayout Spacing="10">
+                <Entry Style="{StaticResource baseEntry}"
+                   Placeholder="Estate Name"
+                       Text="{Binding EstateName}"/>
+                <Entry Style="{StaticResource baseEntry}"
+                   Placeholder="Address"
+                       Text="{Binding Address}"/>
+                <Entry Style="{StaticResource numericEntry}"
+                   Placeholder="Price"
+                       Text="{Binding Price}"/>
+                <Entry Style="{StaticResource numericEntry}"
+                   Placeholder="Bedrooms"
+                       Text="{Binding Bedrooms}"/>
+                <Entry Style="{StaticResource numericEntry}"
+                   Placeholder="Bathrooms"
+                       Text="{Binding Bathrooms}"/>
+                <Entry Style="{StaticResource numericEntry}"
+                   Placeholder="Area"
+                       Text="{Binding Area}"/>
+                <Entry Style="{StaticResource baseEntry}"
+                   Placeholder="Contact Name"
+                       Text="{Binding ContactPersonName}"/>
+                <Entry Style="{StaticResource numericEntry}"
+                   Placeholder="Phone"
+                       Text="{Binding ContactPersonPhone}"/>
+                <Entry Style="{StaticResource baseEntry}"
+                   Placeholder="Email"
+                       Text="{Binding ContactPersonEmail}"/>
+            </VerticalStackLayout>
+        </Frame>
+    </ScrollView>
+</ContentPage>

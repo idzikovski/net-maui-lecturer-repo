@@ -10,6 +10,7 @@ public partial class AppShell : Shell
 		InitializeComponent();
 
 		Routing.RegisterRoute(nameof(EstateDetails), typeof(EstateDetails));
+		Routing.RegisterRoute(nameof(UpsertPage), typeof(UpsertPage));
 	}
 
 	private void LogoutClicked(object sender, EventArgs e)

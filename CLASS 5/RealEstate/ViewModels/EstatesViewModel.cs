@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls;
 using RealEstate.Interfaces;
 using RealEstate.Models;
 using RealEstate.Views;
@@ -48,9 +47,9 @@ namespace RealEstate.ViewModels
         }
 
         [RelayCommand]
-        private void Edit()
+        private void Edit(Estate estate)
         {
-
+            Shell.Current.GoToAsync($"{nameof(UpsertPage)}?EstateId={estate.Id}&IsUpdate=true");
         }
 
         [RelayCommand]
