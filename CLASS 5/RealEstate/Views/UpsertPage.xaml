@@ -15,7 +15,8 @@
         </Style>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="{Binding ActionIcon}"/>
+        <ToolbarItem IconImageSource="{Binding ActionIcon}"
+                     Command="{Binding UpsertCommand}"/>
     </ContentPage.ToolbarItems>
     <ScrollView>
         <Frame HorizontalOptions="FillAndExpand"
@@ -34,10 +35,10 @@
                        Text="{Binding Price}"/>
                 <Entry Style="{StaticResource numericEntry}"
                    Placeholder="Bedrooms"
-                       Text="{Binding Bedrooms}"/>
+                       Text="{Binding RoomNumber}"/>
                 <Entry Style="{StaticResource numericEntry}"
                    Placeholder="Bathrooms"
-                       Text="{Binding Bathrooms}"/>
+                       Text="{Binding BathroomNumber}"/>
                 <Entry Style="{StaticResource numericEntry}"
                    Placeholder="Area"
                        Text="{Binding Area}"/>

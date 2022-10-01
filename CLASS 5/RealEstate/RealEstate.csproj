@@ -58,6 +58,7 @@
 	  <None Remove="Resources\Images\create.png" />
 	  <None Remove="Resources\Images\delete.png" />
 	  <None Remove="Resources\Images\email.png" />
+	  <None Remove="Resources\Images\estate.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\house.png" />
 	  <None Remove="Resources\Images\image.png" />

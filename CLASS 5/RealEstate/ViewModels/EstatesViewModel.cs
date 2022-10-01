@@ -7,10 +7,22 @@ using System.Collections.ObjectModel;
 
 namespace RealEstate.ViewModels
 {
+    [QueryProperty(nameof(Update), nameof(Update))]
     public partial class EstatesViewModel : ObservableObject
     {
         public bool TapLocked { get; set; }
         private readonly IEstatesService _estatesService;
+
+        private bool _update;
+        public bool Update
+        {
+            get => _update;
+            set
+            {
+                _update = value;
+                LoadData();
+            }
+        }
 
         [ObservableProperty]
         private ObservableCollection<Estate> _estates;
@@ -21,6 +33,11 @@ namespace RealEstate.ViewModels
         public EstatesViewModel(IEstatesService estatesService)
         {
             _estatesService = estatesService;
+            LoadData();
+        }
+
+        private void LoadData()
+        {
             _estatesService.GetEstates().ContinueWith(LoadEstates);
         }
 
@@ -57,6 +74,12 @@ namespace RealEstate.ViewModels
         {
             await _estatesService.DeleteEstateById(estate.Id);
             _estates.Remove(estate);
+        }
+
+        [RelayCommand]
+        private void Create()
+        {
+            Shell.Current.GoToAsync(nameof(UpsertPage));
         }
     }
 }

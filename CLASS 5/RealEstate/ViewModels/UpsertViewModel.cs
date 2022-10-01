@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using RealEstate.Interfaces;
 using RealEstate.Models;
 
@@ -6,7 +7,7 @@ namespace RealEstate.ViewModels
 {
     [QueryProperty(nameof(IsUpdate), nameof(IsUpdate))]
     [QueryProperty(nameof(EstateId), nameof(EstateId))]
-    public partial class UpsertViewModel : ObservableObject
+    public partial class UpsertViewModel : Estate
     {
         private readonly IEstatesService _estatesService;
 
@@ -22,6 +23,7 @@ namespace RealEstate.ViewModels
             set
             {
                 _isUpdate = value;
+                ActionIcon = IsUpdate ? "save" : "create";
             }
         }
 
@@ -39,33 +41,6 @@ namespace RealEstate.ViewModels
         [ObservableProperty]
         private string _actionIcon;
 
-        [ObservableProperty]
-        private string _estateName;
-
-        [ObservableProperty]
-        private string _address;
-
-        [ObservableProperty]
-        private int _price;
-
-        [ObservableProperty]
-        private int _bedrooms;
-
-        [ObservableProperty]
-        private int _bathrooms;
-
-        [ObservableProperty]
-        private int _area;
-
-        [ObservableProperty]
-        private string _contactPersonName;
-
-        [ObservableProperty]
-        private string _contactPersonPhone;
-
-        [ObservableProperty]
-        private string _contactPersonEmail;
-
         private void GetEstate(int value)
         {
             _estatesService.GetEstateById(EstateId).ContinueWith(InitView);
@@ -77,16 +52,32 @@ namespace RealEstate.ViewModels
 
             MainThread.BeginInvokeOnMainThread(() =>
             {
+                Id = estate.Id;
                 EstateName = estate.EstateName;
                 Address = estate.Address;
                 Price = estate.Price;
-                Bedrooms = estate.RoomNumber;
-                Bathrooms = estate.BathroomNumber;
+                RoomNumber = estate.RoomNumber;
+                BathroomNumber = estate.BathroomNumber;
                 Area = estate.Area;
                 ContactPersonName = estate.ContactPersonName;
                 ContactPersonPhone = estate.ContactPersonPhone;
                 ContactPersonEmail = estate.ContactPersonEmail;
             });
+        }
+
+        [RelayCommand]
+        private async Task Upsert()
+        {
+            if (IsUpdate)
+            {
+                await _estatesService.Update(this);
+            }
+            else
+            {
+                await _estatesService.Create(this);
+            }
+
+            await Shell.Current.GoToAsync("..?Update=true");
         }
     }
 }

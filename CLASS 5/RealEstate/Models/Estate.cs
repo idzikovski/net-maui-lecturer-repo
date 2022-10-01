@@ -1,41 +1,44 @@
-﻿using Newtonsoft.Json;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 
 namespace RealEstate.Models
 {
-    public class Estate
+    public partial class Estate : ObservableObject
     {
-        [JsonProperty("id")]
-        public long Id { get; set; }
+        [ObservableProperty]
+        private long _id;
 
-        [JsonProperty("estateName")]
-        public string EstateName { get; set; }
+        [ObservableProperty]
+        private string _estateName;
 
-        [JsonProperty("contactPersonName")]
-        public string ContactPersonName { get; set; }
+        [ObservableProperty]
+        private string _contactPersonName;
 
-        [JsonProperty("contactPersonPhone")]
-        public string ContactPersonPhone { get; set; }
+        [ObservableProperty]
+        private string _contactPersonPhone;
 
-        [JsonProperty("contactPersonEmail")]
-        public string ContactPersonEmail { get; set; }
+        [ObservableProperty]
+        private string _contactPersonEmail;
 
-        [JsonProperty("address")]
-        public string Address { get; set; }
+        [ObservableProperty]
+        private string _address;
 
-        [JsonProperty("roomNumber")]
-        public int RoomNumber { get; set; }
+        [ObservableProperty]
+        private int _roomNumber;
 
-        [JsonProperty("bathroomNumber")]
-        public int BathroomNumber { get; set; }
+        [ObservableProperty]
+        private int _bathroomNumber;
 
-        [JsonProperty("area")]
-        public int Area { get; set; }
+        [ObservableProperty]
+        private int _area;
 
-        [JsonProperty("price")]
-        public int Price { get; set; }
+        [ObservableProperty]
+        private int _price;
 
-        public string Photo { get; set; }
+        [ObservableProperty]
+        private string _photo;
 
-        public List<string> Photos { get; set; }
+        [ObservableProperty]
+        private List<string> _photos;
     }
 }

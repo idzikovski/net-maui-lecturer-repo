@@ -49,10 +49,10 @@
                                                    Grid.ColumnSpan="2">
                             <Image Source="bed.png"
                                        HeightRequest="15"/>
-                            <Label Text="{Binding Bedrooms, StringFormat='{0} bedrooms'}"/>
+                            <Label Text="{Binding RoomNumber, StringFormat='{0} bedrooms'}"/>
                             <Image Source="bath.png"
                                        HeightRequest="15"/>
-                            <Label Text="{Binding Bathrooms, StringFormat='{0} bathrooms'}"/>
+                            <Label Text="{Binding BathroomNumber, StringFormat='{0} bathrooms'}"/>
                             <Image Source="house.png"
                                        HeightRequest="15"/>
                             <Label Text="{Binding Area, StringFormat='{0}m²'}"/>

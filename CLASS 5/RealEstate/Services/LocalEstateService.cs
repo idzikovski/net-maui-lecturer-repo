@@ -8,6 +8,7 @@ namespace RealEstate.Services
     {
         private readonly IImageProvider _imageProvider;
         private List<Estate> _estates = new List<Estate>();
+        private long NextId => _estates.Max(x => x.Id) + 1;
 
         public LocalEstateService(IImageProvider imageProvider)
         {
@@ -18,12 +19,17 @@ namespace RealEstate.Services
         {
 			try
 			{
-                using var stream = await FileSystem.OpenAppPackageFileAsync("estates.json");
-                using var reader = new StreamReader(stream);
+                if (!_estates.Any())
+                {
 
-                var contents = reader.ReadToEnd();
+                    using var stream = await FileSystem.OpenAppPackageFileAsync("estates.json");
+                    using var reader = new StreamReader(stream);
 
-                _estates = AddImages(contents);
+                    var contents = reader.ReadToEnd();
+
+                    _estates = AddImages(contents);
+                }
+
                 return _estates;
             }
 			catch (Exception ex)
@@ -61,6 +67,38 @@ namespace RealEstate.Services
 
             _estates.Remove(estate);
             return Task.FromResult(true);
+        }
+
+        public Task<Estate> Update(Estate estate)
+        {
+            var estateFromList = _estates.FirstOrDefault(x => x.Id == estate.Id);
+
+            if (estateFromList == null)
+            {
+                return Task.FromResult(default(Estate));
+            }
+
+            estateFromList.EstateName = estate.EstateName;
+            estateFromList.ContactPersonName = estate.ContactPersonName;
+            estateFromList.ContactPersonPhone = estate.ContactPersonPhone;
+            estateFromList.ContactPersonEmail = estate.ContactPersonEmail;
+            estateFromList.Address = estate.Address;
+            estateFromList.RoomNumber = estate.RoomNumber;
+            estateFromList.BathroomNumber = estate.RoomNumber;
+            estateFromList.Area = estate.Area;
+            estateFromList.Price = estate.Price;
+
+            return Task.FromResult(estateFromList);
+        }
+
+        public Task<Estate> Create(Estate estate)
+        {
+            var id = NextId;
+
+            estate.Id = id;
+            _estates.Insert(0, estate);
+
+            return Task.FromResult(_estates.FirstOrDefault(x=> x.Id == id));
         }
     }
 }

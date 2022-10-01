@@ -9,5 +9,9 @@ namespace RealEstate.Interfaces
         Task<Estate> GetEstateById(long id);
 
         Task<bool> DeleteEstateById(long id);
+
+        Task<Estate> Update(Estate estate);
+
+        Task<Estate> Create(Estate estate);
     }
 }

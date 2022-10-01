@@ -6,7 +6,7 @@ namespace RealEstate.ViewModels
 {
     
     [QueryProperty(nameof(EstateId), nameof(EstateId))]
-    public partial class EstateDetailsViewModel : ObservableObject
+    public partial class EstateDetailsViewModel : Estate
     {
         private readonly IEstatesService _estatesService;
 
@@ -17,46 +17,16 @@ namespace RealEstate.ViewModels
             set
             {
                 _estateId = value;
-                GetEstate(value);
+                GetEstate();
             }
         }
-
-        [ObservableProperty]
-        private List<string> _photos;
-
-        [ObservableProperty]
-        private string _photo;
-
-        [ObservableProperty]
-        private string _estateName;
-
-        [ObservableProperty]
-        private string _address;
-
-        [ObservableProperty]
-        private int _bedrooms;
-
-        [ObservableProperty]
-        private int _bathrooms;
-
-        [ObservableProperty]
-        private int _area;
-
-        [ObservableProperty]
-        private string _contactPersonName;
-
-        [ObservableProperty]
-        private string _contactPersonPhone;
-
-        [ObservableProperty]
-        private string _contactPersonEmail;
 
         public EstateDetailsViewModel(IEstatesService estatesService)
         {
             _estatesService = estatesService;
         }
 
-        private void GetEstate(int value)
+        private void GetEstate()
         {
             _estatesService.GetEstateById(EstateId).ContinueWith(InitView);
         }
@@ -71,8 +41,8 @@ namespace RealEstate.ViewModels
                 Photo = estate.Photo;
                 EstateName = estate.EstateName;
                 Address = estate.Address;
-                Bedrooms = estate.RoomNumber;
-                Bathrooms = estate.BathroomNumber;
+                RoomNumber = estate.RoomNumber;
+                BathroomNumber = estate.BathroomNumber;
                 Area = estate.Area;
                 ContactPersonName = estate.ContactPersonName;
                 ContactPersonPhone = estate.ContactPersonPhone;
