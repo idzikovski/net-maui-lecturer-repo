@@ -13,6 +13,11 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+#if ANDROID && DEBUG
+        Platforms.Android.DangerousAndroidMessageHandlerEmitter.Register();
+        Platforms.Android.DangerousTrustProvider.Register();
+#endif
+
+        return builder.Build();
 	}
 }

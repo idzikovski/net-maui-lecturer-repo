@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:layouts="clr-namespace:SandboxApp.Layouts"
     xmlns:mvvm="clr-namespace:SandboxApp.MVVM"
+    xmlns:data="clr-namespace:SandboxApp.Data"
     xmlns:local="clr-namespace:SandboxApp"
     Shell.FlyoutBehavior="Disabled">
 
@@ -29,6 +30,11 @@
              Icon="dotnet_bot">
             <ShellContent ContentTemplate="{DataTemplate mvvm:FullNamePage}"
                           Route="FullNamePage"/>
+        </Tab>
+        <Tab Title="Data"
+             Icon="dotnet_bot">
+            <ShellContent ContentTemplate="{DataTemplate data:RestClientView}"
+                          Route="RestClientView"/>
         </Tab>
     </TabBar>
 </Shell>
