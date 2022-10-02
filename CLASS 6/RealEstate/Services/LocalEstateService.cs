@@ -9,6 +9,7 @@ namespace RealEstate.Services
         private readonly IImageProvider _imageProvider;
         private List<Estate> _estates = new List<Estate>();
         private long NextId => _estates.Max(x => x.Id) + 1;
+        private string EstatesFilePath => Path.Combine(FileSystem.AppDataDirectory, "estates.json");
 
         public LocalEstateService(IImageProvider imageProvider)
         {
@@ -19,6 +20,14 @@ namespace RealEstate.Services
         {
 			try
 			{
+                if (File.Exists(EstatesFilePath))
+                {
+                    var estates = File.ReadAllText(EstatesFilePath);
+
+                    _estates = JsonConvert.DeserializeObject<List<Estate>>(estates);
+                    return _estates;
+                }
+
                 if (!_estates.Any())
                 {
 
@@ -28,6 +37,7 @@ namespace RealEstate.Services
                     var contents = reader.ReadToEnd();
 
                     _estates = AddImages(contents);
+                    WriteAllEstates();
                 }
 
                 return _estates;
@@ -67,6 +77,8 @@ namespace RealEstate.Services
             }
 
             _estates.Remove(estate);
+            WriteAllEstates();
+
             return Task.FromResult(true);
         }
 
@@ -89,6 +101,8 @@ namespace RealEstate.Services
             estateFromList.Area = estate.Area;
             estateFromList.Price = estate.Price;
 
+
+            WriteAllEstates();
             return Task.FromResult(estateFromList);
         }
 
@@ -99,7 +113,13 @@ namespace RealEstate.Services
             estate.Id = id;
             _estates.Insert(0, estate);
 
+            WriteAllEstates();
             return Task.FromResult(_estates.FirstOrDefault(x=> x.Id == id));
+        }
+
+        private void WriteAllEstates()
+        {
+            File.WriteAllText(EstatesFilePath, JsonConvert.SerializeObject(_estates));
         }
     }
 }
