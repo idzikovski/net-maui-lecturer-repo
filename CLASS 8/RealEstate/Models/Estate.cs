@@ -40,5 +40,24 @@ namespace RealEstate.Models
 
         [ObservableProperty]
         private List<string> _photos;
+
+        public EstateDto Clone()
+        {
+            return new EstateDto
+            {
+                Id = Id,
+                EstateName = EstateName,
+                ContactPersonName = ContactPersonName,
+                ContactPersonPhone = ContactPersonPhone,
+                ContactPersonEmail = ContactPersonEmail,
+                Address = Address,
+                RoomNumber = RoomNumber,
+                BathroomNumber = BathroomNumber,
+                Area = Area,
+                Price = Price,
+                Photo = Photo,
+                Photos = Photos
+            };
+        }
     }
 }

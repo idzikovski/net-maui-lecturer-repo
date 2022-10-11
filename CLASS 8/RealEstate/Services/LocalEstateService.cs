@@ -18,8 +18,8 @@ namespace RealEstate.Services
 
         public async Task<List<Estate>> GetEstates()
         {
-			try
-			{
+            try
+            {
                 if (File.Exists(EstatesFilePath))
                 {
                     var estates = File.ReadAllText(EstatesFilePath);
@@ -42,11 +42,11 @@ namespace RealEstate.Services
 
                 return _estates;
             }
-			catch (Exception ex)
-			{
+            catch (Exception ex)
+            {
                 System.Diagnostics.Debug.WriteLine(ex);
                 return null;
-			}
+            }
         }
 
         public Task<Estate> GetEstateById(long id)
@@ -82,7 +82,7 @@ namespace RealEstate.Services
             return Task.FromResult(true);
         }
 
-        public Task<Estate> Update(Estate estate)
+        public Task<Estate> Update(EstateDto estate)
         {
             var estateFromList = _estates.FirstOrDefault(x => x.Id == estate.Id);
 
@@ -106,15 +106,28 @@ namespace RealEstate.Services
             return Task.FromResult(estateFromList);
         }
 
-        public Task<Estate> Create(Estate estate)
+        public Task<Estate> Create(EstateDto estate)
         {
             var id = NextId;
 
-            estate.Id = id;
-            _estates.Insert(0, estate);
+            var newEstate = new Estate
+            {
+                Id = id,
+                EstateName = estate.EstateName,
+                ContactPersonName = estate.ContactPersonName,
+                ContactPersonPhone = estate.ContactPersonPhone,
+                Address = estate.Address,
+                RoomNumber = estate.RoomNumber,
+                BathroomNumber = estate.BathroomNumber,
+                Area = estate.Area,
+                Price = estate.Price,
+                Photo = estate.Photo,
+                Photos = estate.Photos,
+            };
+            _estates.Insert(0, newEstate);
 
             WriteAllEstates();
-            return Task.FromResult(_estates.FirstOrDefault(x=> x.Id == id));
+            return Task.FromResult(_estates.FirstOrDefault(x => x.Id == id));
         }
 
         private void WriteAllEstates()

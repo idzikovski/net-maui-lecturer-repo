@@ -1,6 +1,6 @@
-﻿using RealEstate.Models;
+﻿using RealEstate.Api.Models;
 
-namespace RealEstate.Interfaces
+namespace RealEstate.Api.Interfaces
 {
     public interface IEstatesService
     {
@@ -10,8 +10,8 @@ namespace RealEstate.Interfaces
 
         Task<bool> DeleteEstateById(long id);
 
-        Task<Estate> Update(EstateDto estate);
+        Task<Estate> Update(Estate estate);
 
-        Task<Estate> Create(EstateDto estate);
+        Task<Estate> Create(Estate estate);
     }
 }

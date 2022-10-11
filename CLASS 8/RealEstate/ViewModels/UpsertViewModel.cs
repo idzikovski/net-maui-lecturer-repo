@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Newtonsoft.Json;
 using RealEstate.Interfaces;
 using RealEstate.Models;
 
@@ -70,11 +71,11 @@ namespace RealEstate.ViewModels
         {
             if (IsUpdate)
             {
-                await _estatesService.Update(this);
+                await _estatesService.Update(Clone());
             }
             else
             {
-                await _estatesService.Create(this);
+                await _estatesService.Create(Clone());
             }
 
             await Shell.Current.GoToAsync("..?Update=true");

@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IRepository<Estate>, EstatesRepository>();
+builder.Services.AddSingleton<IEstatesService, EstatesService>();
 
 var app = builder.Build();
 

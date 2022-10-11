@@ -10,11 +10,11 @@ namespace RealEstate.Api.Controllers
     [ApiController]
     public class EstatesController : ControllerBase
     {
-        private readonly IRepository<Estate> _estatesRepository;
+        private readonly IEstatesService _estatesService;
 
-        public EstatesController(IRepository<Estate> estatesRepository)
+        public EstatesController(IEstatesService estatesService)
         {
-            _estatesRepository = estatesRepository;
+            _estatesService = estatesService;
         }
 
         [HttpGet]
@@ -22,7 +22,7 @@ namespace RealEstate.Api.Controllers
         {
             try
             {
-                return Ok(await _estatesRepository.GetAll());
+                return Ok(await _estatesService.GetEstates());
             }
             catch (Exception ex)
             {
@@ -31,11 +31,11 @@ namespace RealEstate.Api.Controllers
         }
 
         [HttpGet("{id?}")]
-        public async Task<IActionResult> Estates(int id)
+        public async Task<IActionResult> Estates(long id)
         {
             try
             {
-                return Ok(await _estatesRepository.GetById(id));
+                return Ok(await _estatesService.GetEstateById(id));
             }
             catch (Exception ex)
             {
@@ -43,12 +43,12 @@ namespace RealEstate.Api.Controllers
             }
         }
 
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> Create([FromBody] Estate estate)
         {
             try
             {
-                return Ok(await _estatesRepository.Insert(estate));
+                return Ok(await _estatesService.Create(estate));
             }
             catch (Exception ex)
             {
@@ -56,12 +56,12 @@ namespace RealEstate.Api.Controllers
             }
         }
 
-        [HttpPatch("update")]
+        [HttpPatch]
         public async Task<IActionResult> Update([FromBody] Estate estate)
         {
             try
             {
-                return Ok(await _estatesRepository.Update(estate));
+                return Ok(await _estatesService.Update(estate));
             }
             catch (Exception ex)
             {
@@ -69,12 +69,12 @@ namespace RealEstate.Api.Controllers
             }
         }
 
-        [HttpDelete("delete/{id?}")]
+        [HttpDelete("{id?}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                return Ok(await _estatesRepository.Delete(id));
+                return Ok(await _estatesService.DeleteEstateById(id));
             }
             catch (Exception ex)
             {

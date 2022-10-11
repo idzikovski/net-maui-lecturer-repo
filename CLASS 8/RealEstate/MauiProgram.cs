@@ -29,7 +29,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<UpsertViewModel>();
 
 		builder.Services.AddSingleton<IImageProvider, ImageProvider>();
-		builder.Services.AddSingleton<IEstatesService, LocalEstateService>();
+		builder.Services.AddSingleton<IEstatesService, EstatesService>();
+		builder.Services.AddSingleton<IRestService, RestService>();
 
 		return builder.Build();
 	}
