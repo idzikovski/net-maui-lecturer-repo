@@ -6,7 +6,8 @@ namespace RealEstate.Services
 {
     public class RestService : IRestService
     {
-        private readonly Uri BaseUrl = new Uri("http://10.0.2.2:43337/");
+        //private readonly Uri BaseUrl = new Uri("http://10.0.2.2:43337/");
+        private readonly Uri BaseUrl = new Uri("http://20.113.105.157/");
 
         private readonly HttpClient client;
 
