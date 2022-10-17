@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SandboxApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:layouts="clr-namespace:SandboxApp.Layouts"
+    xmlns:mvvm="clr-namespace:SandboxApp.MVVM"
+    xmlns:data="clr-namespace:SandboxApp.Data"
+    xmlns:local="clr-namespace:SandboxApp"
+    Shell.FlyoutBehavior="Disabled">
+
+    <TabBar>
+        <Tab Title="MainPage"
+             Icon="dotnet_bot">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"
+                          Route="MainPage"/>
+        </Tab>
+        <Tab Title="Layouts"
+             Icon="dotnet_bot">
+            <ShellContent
+                Title="Flex"
+                ContentTemplate="{DataTemplate layouts:FlexLayoutPage}"
+                Route="FlexLayoutPage" />
+            <ShellContent
+                Title="Grid"
+                ContentTemplate="{DataTemplate layouts:GridPage}"
+                Route="GridPage" />
+        </Tab>
+        <Tab Title="MVVM"
+             Icon="dotnet_bot">
+            <ShellContent ContentTemplate="{DataTemplate mvvm:FullNamePage}"
+                          Route="FullNamePage"/>
+        </Tab>
+        <Tab Title="Data"
+             Icon="dotnet_bot">
+            <ShellContent ContentTemplate="{DataTemplate data:RestClientView}"
+                          Route="RestClientView"/>
+        </Tab>
+    </TabBar>
+</Shell>
