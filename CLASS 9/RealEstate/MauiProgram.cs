@@ -1,4 +1,5 @@
-﻿using RealEstate.Interfaces;
+﻿using CommunityToolkit.Maui;
+using RealEstate.Interfaces;
 using RealEstate.Services;
 using RealEstate.ViewModels;
 using RealEstate.Views;
@@ -12,6 +13,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -31,6 +33,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<IImageProvider, ImageProvider>();
 		builder.Services.AddSingleton<IEstatesService, EstatesService>();
 		builder.Services.AddSingleton<IRestService, RestService>();
+		builder.Services.AddSingleton<Interfaces.IPreferences, PreferencesImp>();
 
 		return builder.Build();
 	}

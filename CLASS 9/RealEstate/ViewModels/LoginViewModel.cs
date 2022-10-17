@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RealEstate.Interfaces;
 
 namespace RealEstate.ViewModels
 {
@@ -7,7 +8,7 @@ namespace RealEstate.ViewModels
     {
         private const string FakePass = "123";
         public static readonly string IsLoggedInKey = "IsLoggedInKey";
-
+        private readonly Interfaces.IPreferences _preferences;
         [ObservableProperty]
         private string _username;
 
@@ -17,9 +18,11 @@ namespace RealEstate.ViewModels
         [ObservableProperty]
         private bool _loginErrorPresent;
 
-        public LoginViewModel()
+        public LoginViewModel(Interfaces.IPreferences preferences)
         {
-            if (Preferences.Default.Get(IsLoggedInKey, false))
+            _preferences = preferences;
+
+            if (_preferences.Get(IsLoggedInKey, false))
             {
                 Shell.Current.GoToAsync("//EstatesPage");
             }
@@ -31,7 +34,7 @@ namespace RealEstate.ViewModels
             if (!string.IsNullOrEmpty(Username) && Password == FakePass)
             {
                 await Shell.Current.GoToAsync("//EstatesPage");
-                Preferences.Default.Set(IsLoggedInKey, true);
+                _preferences.Set(IsLoggedInKey, true);
             }
             else
             {
